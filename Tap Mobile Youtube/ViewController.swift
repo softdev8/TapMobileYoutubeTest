@@ -52,15 +52,21 @@ class ViewController: UIViewController {
                         
                         self.tableView.reloadData()
                     } catch let error {
-                        print(error)
+                        self.showError(error: error)
                     }
                 }
                 break
             case .failure(let error):
-                print(error)
+                self.showError(error: error)
                 break
             }
         }
+    }
+    
+    private func showError(error: Error) {
+        let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+        self.present(alert, animated: true, completion: nil)
     }
 
 }
